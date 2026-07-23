@@ -82,7 +82,8 @@ export default function Navbar() {
             className="text-body-sm font-semibold tracking-tight text-text-primary transition-opacity hover:opacity-70"
           >
             {profile.firstName}
-            <span className="text-text-tertiary">.dev</span>
+            <span className="text-text-tertiary">&nbsp;</span>
+            {profile.lastName}
           </Link>
 
           {/* Desktop Nav */}
