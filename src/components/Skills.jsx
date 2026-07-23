@@ -34,7 +34,7 @@ export default function Skills() {
         <div className="grid gap-6 lg:grid-cols-3">
           {primaryExpertise.map((skill, index) => (
             <Reveal key={skill.title} delay={index * 0.1}>
-              <div className={`group relative h-full overflow-hidden rounded-card border border-[var(--border)] bg-[var(--surface)] p-6 shadow-card transition-all hover:-translate-y-2 hover:border-accent hover:shadow-xl`}>
+              <div className="group relative h-full overflow-hidden rounded-card border border-[var(--border)] bg-[var(--surface)]/60 backdrop-blur-sm p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/10">
                 {/* Gradient background overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${skillColors[skill.title] || 'from-gray-500/10 to-gray-500/5'} opacity-0 transition-opacity group-hover:opacity-100`} />
                 
@@ -65,7 +65,7 @@ export default function Skills() {
 
         {/* Supporting Skills Grid */}
         <Reveal>
-          <div className="mt-16 ml-4 mr-4 rounded-card border border-[var(--border)] bg-[var(--surface)] p-6 lg:p-8 shadow-card lg:ml-0 lg:mr-0">
+          <div className="mt-16 ml-4 mr-4 rounded-card border border-[var(--border)] bg-[var(--surface)]/60 backdrop-blur-sm p-6 lg:p-8 transition-all hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 lg:ml-0 lg:mr-0">
             <div className="flex items-center gap-3">
               <div className="rounded-lg bg-accent/10 p-2 text-accent">
                 <FiTool size={20} />

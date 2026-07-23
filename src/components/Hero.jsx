@@ -23,45 +23,44 @@ function ProfileImage() {
         onDoubleClick={handleDoubleClick}
         title="Double-click to expand"
       >
-        <div className="relative h-[280px] w-[280px] overflow-hidden rounded-2xl shadow-elevated sm:h-[320px] sm:w-[320px] lg:h-[380px] lg:w-[380px] cursor-pointer group">
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-purple-500/20 mix-blend-overlay" />
+        {/* FIX: Added dark:bg-none and dark:from-transparent dark:to-transparent to completely kill the light mode gradient in dark mode. Removed shadow in dark mode so it blends perfectly. */}
+        <div className="relative h-[280px] w-[280px] sm:h-[320px] sm:w-[320px] lg:h-[380px] lg:w-[380px] cursor-pointer group overflow-hidden rounded-2xl border-2 border-slate-300 dark:border-accent/30 bg-gradient-to-b from-slate-100 to-slate-300 dark:bg-none dark:from-transparent dark:to-transparent shadow-elevated dark:shadow-none flex items-end justify-center transition-all duration-300">
           
+          {/* Subtle glow for light mode only */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 to-purple-500/10 dark:opacity-0 pointer-events-none" />
+
           {/* Hover overlay */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-            <span className="text-white text-body-sm font-medium">Double-click to expand</span>
+          <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 z-20">
+            <span className="text-white text-body-sm font-medium drop-shadow-md">Double-click to expand</span>
           </div>
           
           {!imageError ? (
             <img
-              src="/profile-picture.jpg"
+              src="/profile-picture1.png"
               alt={profile.name}
-              className="h-full w-full object-cover"
+              className="relative z-10 h-full w-full object-contain object-bottom brightness-95 contrast-105 dark:brightness-110 dark:contrast-100 dark:drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] transition-all duration-300"
               loading="eager"
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[var(--surface)] to-[var(--surface-hover)] text-text-tertiary">
+            <div className="flex h-full w-full items-center justify-center bg-transparent text-text-tertiary">
               <span className="font-display text-6xl font-bold">{profile.firstName[0]}{profile.lastName[0]}</span>
             </div>
           )}
-          
-          {/* Decorative border */}
-          <div className="absolute inset-0 rounded-2xl border-2 border-accent/20" />
         </div>
         
-        {/* Floating elements */}
+        {/* Floating icons */}
         <motion.div
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -right-4 top-8 rounded-full bg-accent/10 p-3 backdrop-blur-sm"
+          className="absolute -right-4 top-8 rounded-full bg-accent/10 p-3 backdrop-blur-sm z-30"
         >
           <FiCode size={24} className="text-accent" />
         </motion.div>
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-          className="absolute -left-4 bottom-12 rounded-full bg-purple-500/10 p-3 backdrop-blur-sm"
+          className="absolute -left-4 bottom-12 rounded-full bg-purple-500/10 p-3 backdrop-blur-sm z-30"
         >
           <FiLayers size={24} className="text-purple-500" />
         </motion.div>
@@ -75,7 +74,7 @@ function ProfileImage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
             onClick={() => setIsExpanded(false)}
           >
             <motion.div
@@ -83,17 +82,17 @@ function ProfileImage() {
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
               transition={{ duration: 0.3 }}
-              className="relative max-w-4xl max-h-[90vh]"
+              className="relative max-w-4xl max-h-[90vh] rounded-2xl overflow-hidden bg-gradient-to-b from-slate-200 to-slate-300 dark:bg-none dark:from-transparent dark:to-transparent"
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src="/profile-picture.jpg"
+                src="/profile-picture1.png"
                 alt={profile.name}
-                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                className="max-w-full max-h-[90vh] object-contain object-bottom brightness-95 contrast-105 dark:brightness-110 dark:contrast-100 dark:drop-shadow-2xl"
               />
               <button
                 onClick={() => setIsExpanded(false)}
-                className="absolute -top-4 -right-4 h-10 w-10 flex items-center justify-center rounded-full bg-accent text-white hover:bg-accent-hover transition-colors shadow-lg"
+                className="absolute top-4 right-4 h-10 w-10 flex items-center justify-center rounded-full bg-accent text-white hover:bg-accent-hover transition-colors shadow-lg z-50"
                 aria-label="Close"
               >
                 <FiX size={20} />
@@ -138,7 +137,6 @@ export default function Hero() {
     let currentIndex = 0;
     const scrollNextSection = () => {
       if (!isAutoScrolling || currentIndex >= sections.length) {
-        // If we've reached the end, go back to home and stop
         if (currentIndex >= sections.length) {
           window.scrollTo({ top: 0, behavior: 'smooth' });
           setIsAutoScrolling(false);
@@ -156,7 +154,6 @@ export default function Hero() {
       }
     };
 
-    // Start from the next section (about)
     currentIndex = 1;
     scrollNextSection();
   };
@@ -170,7 +167,6 @@ export default function Hero() {
   };
 
   useEffect(() => {
-    // Add click listener to stop auto-scroll
     const handleClick = () => {
       if (isAutoScrolling) {
         stopAutoScroll();
