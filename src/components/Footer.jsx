@@ -13,7 +13,7 @@ export default function Footer() {
               onClick={() => window.scrollTo(0, 0)}
               className="text-heading font-semibold tracking-tight text-text-primary hover:opacity-70"
             >
-              {profile.firstName}<span className="text-text-tertiary">.dev</span>
+              {profile.firstName}<span className="text-text-tertiary">&nbsp;</span> {profile.lastname}
             </Link>
             <p className="mt-2 text-body-sm text-text-secondary">
               © {new Date().getFullYear()} {profile.name}. All rights reserved.
