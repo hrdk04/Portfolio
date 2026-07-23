@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
+import { FiSun, FiMoon, FiMenu, FiX, FiMonitor } from 'react-icons/fi';
 import { profile } from '../data/profile';
 import { useTheme } from '../contexts/ThemeContext';
 import { useScrollProgress } from '../hooks/useScrollProgress';
@@ -122,8 +122,9 @@ export default function Navbar() {
               onClick={toggleTheme}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full text-text-secondary transition-colors hover:bg-[var(--surface-hover)] hover:text-text-primary"
               aria-label="Toggle theme"
+              title={`Current theme: ${theme}`}
             >
-              {theme === 'dark' ? <FiSun size={16} /> : <FiMoon size={16} />}
+              {theme === 'dark' ? <FiSun size={16} /> : theme === 'light' ? <FiMoon size={16} /> : <FiMonitor size={16} />}
             </button>
 
             <Link

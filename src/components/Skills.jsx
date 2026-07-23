@@ -24,7 +24,7 @@ const skillColors = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-padding py-12 lg:py-16 bg-gradient-to-b from-[var(--surface-hover)]/30 to-transparent">
+    <section id="skills" className="section-padding py-12 lg:py-16 bg-gradient-to-b from-transparent to-[var(--surface-hover)]/20">
       <div className="container-main">
         <Reveal>
           <SectionTitle eyebrow="Capabilities" title="The tools I use to build." />

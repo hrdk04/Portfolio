@@ -5,7 +5,7 @@ import Contact from '../components/Contact';
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-6 md:gap-12 lg:gap-16">
+    <div className="flex flex-col gap-4 md:gap-8 lg:gap-12">
       <Hero />
       <About />
       <Skills />

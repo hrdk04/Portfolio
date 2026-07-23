@@ -72,7 +72,7 @@ export default function Projects({ featuredOnly = false }) {
   const displayProjects = featuredOnly ? [] : allProjects.filter(p => !p.featured);
 
   return (
-    <section id="projects" className="section-padding">
+    <section id="projects" className="section-padding !pt-8 lg:!pt-0">
       <div className="container-main">
         <Reveal>
           <SectionTitle eyebrow="Work" title={featuredOnly ? "Featured projects." : "All projects and experiments."} />

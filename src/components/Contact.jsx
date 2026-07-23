@@ -70,7 +70,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section-padding py-12 lg:py-16 bg-gradient-to-b from-[var(--surface-hover)]/20 to-[var(--surface-hover)]/40">
+    <section id="contact" className="section-padding py-12 lg:py-16 bg-gradient-to-b from-transparent to-[var(--surface-hover)]/20">
       <div className="container-main max-w-4xl">
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Left Column - Contact Info */}

@@ -9,7 +9,7 @@ export default function Certifications({ featuredOnly = false }) {
   const displayCertifications = featuredOnly ? certifications.slice(0, 2) : certifications;
 
   return (
-    <section id="certifications" className="section-padding">
+    <section id="certifications" className="section-padding !pt-4 lg:!pt-0">
       <div className="container-main">
         <Reveal>
           <SectionTitle eyebrow="Credentials" title={featuredOnly ? "Featured certifications." : "Certifications and continuous learning."} />

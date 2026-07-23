@@ -1,56 +1,108 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { FiArrowRight, FiChevronDown, FiGithub, FiLinkedin, FiMail, FiCode, FiLayers } from 'react-icons/fi';
+import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { FiArrowRight, FiChevronDown, FiGithub, FiLinkedin, FiMail, FiCode, FiLayers, FiX } from 'react-icons/fi';
 import { profile, techStack } from '../data/profile';
 import { useState, useEffect, useRef } from 'react';
 
 function ProfileImage() {
   const [imageError, setImageError] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleDoubleClick = () => {
+    if (!imageError) {
+      setIsExpanded(true);
+    }
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-      className="relative"
-    >
-      <div className="relative h-[280px] w-[280px] overflow-hidden rounded-2xl shadow-elevated sm:h-[320px] sm:w-[320px] lg:h-[380px] lg:w-[380px]">
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-purple-500/20 mix-blend-overlay" />
-        
-        {!imageError ? (
-          <img
-            src="/profile-picture.jpg"
-            alt={profile.name}
-            className="h-full w-full object-cover"
-            loading="eager"
-            onError={() => setImageError(true)}
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[var(--surface)] to-[var(--surface-hover)] text-text-tertiary">
-            <span className="font-display text-6xl font-bold">{profile.firstName[0]}{profile.lastName[0]}</span>
+    <>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+        className="relative"
+        onDoubleClick={handleDoubleClick}
+        title="Double-click to expand"
+      >
+        <div className="relative h-[280px] w-[280px] overflow-hidden rounded-2xl shadow-elevated sm:h-[320px] sm:w-[320px] lg:h-[380px] lg:w-[380px] cursor-pointer group">
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-purple-500/20 mix-blend-overlay" />
+          
+          {/* Hover overlay */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+            <span className="text-white text-body-sm font-medium">Double-click to expand</span>
           </div>
-        )}
+          
+          {!imageError ? (
+            <img
+              src="/profile-picture.jpg"
+              alt={profile.name}
+              className="h-full w-full object-cover"
+              loading="eager"
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[var(--surface)] to-[var(--surface-hover)] text-text-tertiary">
+              <span className="font-display text-6xl font-bold">{profile.firstName[0]}{profile.lastName[0]}</span>
+            </div>
+          )}
+          
+          {/* Decorative border */}
+          <div className="absolute inset-0 rounded-2xl border-2 border-accent/20" />
+        </div>
         
-        {/* Decorative border */}
-        <div className="absolute inset-0 rounded-2xl border-2 border-accent/20" />
-      </div>
-      
-      {/* Floating elements */}
-      <motion.div
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -right-4 top-8 rounded-full bg-accent/10 p-3 backdrop-blur-sm"
-      >
-        <FiCode size={24} className="text-accent" />
+        {/* Floating elements */}
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -right-4 top-8 rounded-full bg-accent/10 p-3 backdrop-blur-sm"
+        >
+          <FiCode size={24} className="text-accent" />
+        </motion.div>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          className="absolute -left-4 bottom-12 rounded-full bg-purple-500/10 p-3 backdrop-blur-sm"
+        >
+          <FiLayers size={24} className="text-purple-500" />
+        </motion.div>
       </motion.div>
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        className="absolute -left-4 bottom-12 rounded-full bg-purple-500/10 p-3 backdrop-blur-sm"
-      >
-        <FiLayers size={24} className="text-purple-500" />
-      </motion.div>
-    </motion.div>
+
+      {/* Expanded Image Modal */}
+      <AnimatePresence>
+        {isExpanded && !imageError && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+            onClick={() => setIsExpanded(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              transition={{ duration: 0.3 }}
+              className="relative max-w-4xl max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src="/profile-picture.jpg"
+                alt={profile.name}
+                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              />
+              <button
+                onClick={() => setIsExpanded(false)}
+                className="absolute -top-4 -right-4 h-10 w-10 flex items-center justify-center rounded-full bg-accent text-white hover:bg-accent-hover transition-colors shadow-lg"
+                aria-label="Close"
+              >
+                <FiX size={20} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -142,7 +194,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--bg)] via-[var(--surface-hover)]/10 to-[var(--bg)] pb-20"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden pb-20"
     >
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-[0.03]">
@@ -189,7 +241,8 @@ export default function Hero() {
               className="font-display text-display-xl text-text-primary"
             >
               <span className="italic bg-gradient-to-r from-text-primary to-text-secondary bg-clip-text text-transparent">{profile.firstName}</span>
-              <br />
+              <span className="hidden lg:inline">&nbsp;</span>
+              <span className="lg:hidden"> </span>
               <span className="italic bg-gradient-to-r from-text-secondary to-accent bg-clip-text text-transparent">{profile.lastName}</span>
             </motion.h1>
 
@@ -270,20 +323,6 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-24 left-1/2 -translate-x-1/2 py-6 cursor-pointer"
-        onClick={startAutoScroll}
-      >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-caption text-text-tertiary">{isAutoScrolling ? 'Scrolling...' : 'Click to explore'}</span>
-          <FiChevronDown className={`text-text-tertiary ${isAutoScrolling ? 'animate-spin' : 'animate-scroll-hint'}`} size={20} />
-        </div>
-      </motion.div>
     </section>
   );
 }
