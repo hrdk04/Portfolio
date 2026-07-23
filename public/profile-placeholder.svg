@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="90" y1="70" x2="420" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE" stop-opacity="0.9" />
+      <stop offset="1" stop-color="#0F172A" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#0B1224"/>
+  <circle cx="256" cy="190" r="78" fill="url(#g)"/>
+  <path d="M140 398C147 330 196 284 256 284C316 284 365 330 372 398" stroke="#E2E8F0" stroke-width="26" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="226" stroke="#22D3EE" stroke-opacity="0.18" stroke-width="2"/>
+  <text x="256" y="454" fill="#94A3B8" font-family="Arial, sans-serif" font-size="28" text-anchor="middle">Profile Photo Here</text>
+</svg>
