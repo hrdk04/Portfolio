@@ -85,9 +85,9 @@ export default function Contact() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {/* Availability */}
-                <div className="flex items-center justify-center gap-3 rounded-lg border border-accent/30 bg-accent/5 p-4 lg:justify-start">
+                <div className="flex items-center justify-center gap-3 rounded-xl border border-accent/30 bg-accent/5 p-4 backdrop-blur-md lg:justify-start">
                   <span className="relative flex h-3 w-3">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500" />
@@ -96,17 +96,17 @@ export default function Contact() {
                 </div>
 
                 {/* Location */}
-                <div className="flex items-center justify-center gap-3 text-text-secondary lg:justify-start">
-                  <div className="rounded-lg bg-[var(--surface-hover)] p-2">
+                <div className="flex items-center justify-center gap-3 rounded-xl border border-[var(--border)]/50 bg-[var(--surface)]/30 p-4 backdrop-blur-md text-text-secondary transition-all hover:border-[var(--border)] hover:bg-[var(--surface)]/50 lg:justify-start">
+                  <div className="rounded-lg bg-[var(--surface-hover)]/50 p-2">
                     <FiMapPin size={18} />
                   </div>
-                  <span className="text-body-sm">{profile.location}</span>
+                  <span className="text-body-sm font-medium">{profile.location}</span>
                 </div>
 
                 {/* Email */}
                 <a 
                   href={`mailto:${profile.email}`}
-                  className="flex items-center justify-center gap-3 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 lg:justify-start"
+                  className="flex items-center justify-center gap-3 rounded-xl border border-[var(--border)]/50 bg-[var(--surface)]/30 backdrop-blur-md p-4 transition-all hover:border-accent/50 hover:bg-[var(--surface)]/50 hover:shadow-lg hover:shadow-accent/10 lg:justify-start"
                 >
                   <div className="rounded-lg bg-accent/10 p-2 text-accent">
                     <FiMail size={18} />
@@ -127,7 +127,7 @@ export default function Contact() {
                       href={link.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="group inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-body-sm font-medium text-text-secondary transition-all hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10"
+                      className="group inline-flex items-center gap-2 rounded-full border border-[var(--border)]/50 bg-[var(--surface)]/30 backdrop-blur-md px-5 py-2.5 text-body-sm font-medium text-text-secondary transition-all hover:border-accent/50 hover:bg-[var(--surface)]/50 hover:text-accent hover:shadow-lg hover:shadow-accent/10"
                     >
                       <span className="transition-colors group-hover:text-accent">
                         {socialIcons[link.label] || <FiMail size={18} />}
@@ -142,7 +142,7 @@ export default function Contact() {
 
           {/* Right Column - Contact Form */}
           <Reveal delay={0.2}>
-            <div className="rounded-card border border-[var(--border)] bg-[var(--surface)] p-6 shadow-xl sm:p-8">
+            <div className="rounded-card border border-[var(--border)]/50 bg-[var(--surface)]/30 backdrop-blur-md p-6 shadow-xl transition-all hover:border-accent/30 hover:shadow-accent/10 sm:p-8">
               <div className="mb-6 text-center lg:text-left">
                 <h3 className="text-heading font-semibold text-text-primary">Send a message</h3>
                 <p className="mt-2 text-body-sm text-text-secondary">Fill out the form below and I'll get back to you as soon as possible.</p>
@@ -159,7 +159,8 @@ export default function Contact() {
                       onChange={handleChange} 
                       required 
                       placeholder="Your name" 
-                      className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-body-sm text-text-primary placeholder-[var(--text-tertiary)] outline-none transition-all focus:border-accent focus:ring-2 focus:ring-accent/20" 
+                      /* Added dark:bg-white/5 and dark:text-white for proper dark mode rendering */
+                      className="w-full rounded-lg border border-[var(--border)]/50 bg-white/60 dark:bg-white/5 backdrop-blur-sm px-4 py-3 text-body-sm text-text-primary dark:text-white placeholder-[var(--text-tertiary)] outline-none transition-all focus:border-accent focus:bg-white/80 dark:focus:bg-white/10 focus:ring-2 focus:ring-accent/20" 
                     />
                   </div>
                   <div className="space-y-2">
@@ -172,7 +173,7 @@ export default function Contact() {
                       required 
                       type="email" 
                       placeholder="your@email.com" 
-                      className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-body-sm text-text-primary placeholder-[var(--text-tertiary)] outline-none transition-all focus:border-accent focus:ring-2 focus:ring-accent/20" 
+                      className="w-full rounded-lg border border-[var(--border)]/50 bg-white/60 dark:bg-white/5 backdrop-blur-sm px-4 py-3 text-body-sm text-text-primary dark:text-white placeholder-[var(--text-tertiary)] outline-none transition-all focus:border-accent focus:bg-white/80 dark:focus:bg-white/10 focus:ring-2 focus:ring-accent/20" 
                     />
                   </div>
                 </div>
@@ -186,15 +187,16 @@ export default function Contact() {
                     required 
                     rows="5" 
                     placeholder="Tell me about your project..." 
-                    className="w-full resize-none rounded-lg border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-body-sm text-text-primary placeholder-[var(--text-tertiary)] outline-none transition-all focus:border-accent focus:ring-2 focus:ring-accent/20" 
+                    className="w-full resize-none rounded-lg border border-[var(--border)]/50 bg-white/60 dark:bg-white/5 backdrop-blur-sm px-4 py-3 text-body-sm text-text-primary dark:text-white placeholder-[var(--text-tertiary)] outline-none transition-all focus:border-accent focus:bg-white/80 dark:focus:bg-white/10 focus:ring-2 focus:ring-accent/20" 
                   />
                 </div>
 
-                <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between lg:items-start lg:justify-start">
+                {/* Updated this container to center the button and status message */}
+                <div className="flex flex-col items-center justify-center gap-4 pt-4 w-full">
                   <button 
                     disabled={loading} 
                     type="submit" 
-                    className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-body-sm font-medium text-white transition-all hover:bg-accent-hover hover:shadow-lg hover:shadow-accent/25 disabled:cursor-not-allowed disabled:opacity-70"
+                    className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3 text-body-sm font-medium text-white transition-all hover:bg-accent-hover hover:shadow-lg hover:shadow-accent/25 disabled:cursor-not-allowed disabled:opacity-70"
                   >
                     {loading ? (
                       <>
@@ -210,7 +212,7 @@ export default function Contact() {
                   </button>
                   
                   {status.message && (
-                    <div className={`flex items-center gap-2 text-body-sm ${status.type === 'success' ? 'text-emerald-500' : 'text-red-500'}`}>
+                    <div className={`flex items-center justify-center gap-2 text-body-sm text-center ${status.type === 'success' ? 'text-emerald-500' : 'text-red-500'}`}>
                       {status.type === 'success' ? <FiCheckCircle size={16} /> : <FiAlertCircle size={16} />}
                       {status.message}
                     </div>
