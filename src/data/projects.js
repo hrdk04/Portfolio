@@ -9,6 +9,8 @@ const featuredProjectsList = [
     repoUrl: 'https://github.com/hrdk04/DealHunt',
     color: '#3b82f6',
     featured: true,
+    image: "/images/project1.png",            // Make sure this points to your screenshot
+    presentationUrl: "/docs/project1.pdf",    // Make sure this points to your PDF
   },
   {
     name: 'CareDAC',
@@ -20,6 +22,7 @@ const featuredProjectsList = [
     repoUrl: 'https://github.com/hrdk04/CareDAC',
     color: '#10b981',
     featured: true,
+    image: "/images/project2.png", 
   },
   {
     name: 'Playzone',
@@ -31,6 +34,8 @@ const featuredProjectsList = [
     repoUrl: 'https://github.com/hrdk04/Playzone',
     color: '#8b5cf6',
     featured: true,
+    image: "/images/project3.png",            // Make sure this points to your screenshot
+    presentationUrl: "/docs/project3.pdf", 
   },
 ];
 
